@@ -1,7 +1,7 @@
 
 ## TODO
 - 2nd microservice
-- RabbitMQ (connector + streams)
-- Eureka
-- Helm chart
-- Kind local registry
+- RabbitMQ (connector OR streams)
+- x Helm chart
+- x Kind local registry
+- x Liveness and readiness probe

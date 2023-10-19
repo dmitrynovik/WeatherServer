@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using Steeltoe.Connector.RabbitMQ;
 //using Steeltoe.Discovery.Client;
 using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Health;
 using Steeltoe.Management.Tracing;
 
 namespace WeatherServer
@@ -39,7 +41,7 @@ namespace WeatherServer
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        {   
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,9 +51,12 @@ namespace WeatherServer
 
             app.UseHttpsRedirection();
             app.UseRouting();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                // Add management endpoints into pipeline like this
+                endpoints.Map<HealthEndpoint>();
             });
         }
     }
