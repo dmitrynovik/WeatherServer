@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Steeltoe.Connector.RabbitMQ;
-using Steeltoe.Discovery.Client;
+//using Steeltoe.Discovery.Client;
 using Steeltoe.Management.Endpoint;
 using Steeltoe.Management.Tracing;
 
@@ -23,7 +23,7 @@ namespace WeatherServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDiscoveryClient(Configuration);
+            //services.AddDiscoveryClient(Configuration);
             services.AddRabbitMQConnection(Configuration);
             services.AddAllActuators(Configuration);
             services.ActivateActuatorEndpoints();
