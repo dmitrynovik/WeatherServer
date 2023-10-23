@@ -28,10 +28,8 @@ namespace WeatherServer.Controllers
         }
 
          [HttpGet]
-        public async Task<WeatherForecast> Get()
+        public async Task<WeatherForecast> Get(double lat = -33.52, double lon = 151.12)
         {
-            const double lat = -33.52;
-            const double lon = 151.12;
             var url = $"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,windspeed_10m&hourly=temperature_2m,relativehumidity_2m,windspeed_10m";
             _logger.LogInformation("Getting forecast");
 
