@@ -25,12 +25,12 @@ namespace WeatherServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDiscoveryClient(Configuration);
             services.AddRabbitMQConnection(Configuration);
             services.AddAllActuators(Configuration);
             services.ActivateActuatorEndpoints();
             services.AddDistributedTracingAspNetCore();
             services.AddControllers();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeatherServer", Version = "v1" });

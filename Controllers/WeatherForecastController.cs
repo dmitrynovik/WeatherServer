@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Basic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OpenMeteo;
@@ -18,18 +19,22 @@ namespace WeatherServer.Controllers
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+        private readonly WeatherProcessor _weatherProcessor;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(IHttpClientFactory httpClientFactory, ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(WeatherProcessor weatherProcessor, IHttpClientFactory httpClientFactory, ILogger<WeatherForecastController> logger)
         {
+            _weatherProcessor = weatherProcessor;
             _httpClientFactory = httpClientFactory;
             _logger = logger;
         }
 
-         [HttpGet]
+        [HttpGet]
         public async Task<WeatherForecast> Get(double lat = -33.52, double lon = 151.12)
         {
+            _weatherProcessor.Handle(new Model.Coordinate { Latitude = lat, Longitude = lon });
+            
             var url = $"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,windspeed_10m&hourly=temperature_2m,relativehumidity_2m,windspeed_10m";
             _logger.LogInformation("Getting forecast");
 
