@@ -7,6 +7,7 @@ namespace OpenMeteo
     /// </summary>
     public class WeatherForecast
     {
+        public string Name { get; set; }
         /// <summary>
         /// WGS84 of the center of the weather grid-cell which was used to generate this forecast. 
         /// This coordinate might be up to 5 km away.

@@ -65,8 +65,16 @@ ingress:
             servicePort: 80
 ```
 
-### Code
+## Code
 ```
   Host.CreateDefaultBuilder(args)
                 .AddStreamServices<WeatherProcessor>()
+```
+### Startup.cs
+```
+ services.AddHttpClient();
+
+            // Add Rabbit template
+            services.AddRabbitTemplate();
+            services.AddHostedService<WeatherService>();
 ```
