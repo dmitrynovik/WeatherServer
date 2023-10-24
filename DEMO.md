@@ -65,11 +65,6 @@ ingress:
             servicePort: 80
 ```
 
-## Steeltoe Stream
-- [Core-neutral message middleware](https://docs.steeltoe.io/api/v3/stream/stream-reference.html)
-- Channels as programming abstractions representing message destinations
-- Binder abstractions
-
 ### Code
 ```
   Host.CreateDefaultBuilder(args)
