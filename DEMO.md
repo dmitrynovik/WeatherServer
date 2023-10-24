@@ -36,8 +36,8 @@ appVersion: "latest"
 ### Values.yaml
 ```
 image:
-  repository: localhost:5001/weather-server
-  name: weather-server
+  repository: localhost:5001/weather-web-server
+  name: weather-web-server
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -56,12 +56,12 @@ ingress:
       kubernetes.io/ingress.class: nginx
       kubernetes.io/tls-acme: "true"
   hosts:
-    - host: weather-server.local
+    - host: weather-web-server.local
       paths:
         - path: /
           pathType: Prefix
           backend:
-            serviceName: weather-server-svc
+            serviceName: weather-web-server-svc
             servicePort: 80
 ```
 
