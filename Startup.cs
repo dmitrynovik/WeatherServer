@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +11,8 @@ using Steeltoe.Connector.RabbitMQ;
 using Steeltoe.Management.Endpoint;
 using Steeltoe.Management.Endpoint.Health;
 using Steeltoe.Management.Tracing;
+using Steeltoe.Messaging.RabbitMQ.Config;
+using Steeltoe.Messaging.RabbitMQ.Extensions;
 
 namespace WeatherServer
 {
@@ -26,6 +29,10 @@ namespace WeatherServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRabbitMQConnection(Configuration);
+
+            // IQueue quorum = QueueBuilder.Durable("weather").Quorum().Build();
+            // services.AddRabbitQueue(quorum);
+
             services.AddAllActuators(Configuration);
             services.ActivateActuatorEndpoints();
             services.AddDistributedTracingAspNetCore();
