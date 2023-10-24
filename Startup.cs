@@ -14,7 +14,7 @@ using Steeltoe.Management.Tracing;
 using Steeltoe.Messaging.RabbitMQ.Config;
 using Steeltoe.Messaging.RabbitMQ.Extensions;
 
-namespace WeatherServer
+namespace WeatherWebServer
 {
     public class Startup
     {
@@ -40,7 +40,7 @@ namespace WeatherServer
             
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeatherServer", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeatherWebServer", Version = "v1" });
             });
 
             services.AddHttpClient();
@@ -53,7 +53,7 @@ namespace WeatherServer
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeatherServer"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeatherWebServer"));
             }
 
             app.UseHttpsRedirection();

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OpenMeteo;
 
-namespace WeatherServer.Controllers
+namespace WeatherWebServer.Controllers
 {
     [ApiController]
     [Route("[controller]")]

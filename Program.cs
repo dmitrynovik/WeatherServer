@@ -3,9 +3,9 @@ using Microsoft.Extensions.Hosting;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Logging;
 using Steeltoe.Stream.Extensions;
-using WeatherServer.Services;
+using WeatherWebServer.Services;
 
-namespace WeatherServer
+namespace WeatherWebServer
 {
     public class Program
     {

@@ -4,10 +4,10 @@ using Steeltoe.Messaging.Handler.Attributes;
 using Steeltoe.Messaging.RabbitMQ.Attributes;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
-using WeatherServer.Model;
+using WeatherWebServer.Model;
 
 
-namespace WeatherServer.Services
+namespace WeatherWebServer.Services
 {
     [EnableBinding(typeof(ISink))]
     public class WeatherConsumer
