@@ -5,7 +5,7 @@
 ## Helm
 - [Helm Create](https://helm.sh/docs/helm/helm_create/)
 - helm package .
-- helm -n weather install weather-server ./weather-server-0.1.0.tgz
+- helm -n weather install weather-web-server ./weather-web-server-0.1.0.tgz
 
 # Endpoints
 - /actuator/health

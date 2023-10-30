@@ -2,8 +2,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Logging;
+using Steeltoe.Stream.Extensions;
+using WeatherWebServer.Services;
 
-namespace WeatherServer
+namespace WeatherWebServer
 {
     public class Program
     {
@@ -15,6 +17,7 @@ namespace WeatherServer
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseCloudHosting(55007)
+                .AddStreamServices<WeatherConsumer>()
                 .ConfigureLogging((context, builder) => builder.AddDynamicConsole())
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
