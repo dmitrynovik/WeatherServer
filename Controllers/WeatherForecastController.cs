@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OpenMeteo;
+using WeatherWebServer.Services;
 
 namespace WeatherWebServer.Controllers
 {
@@ -21,24 +22,26 @@ namespace WeatherWebServer.Controllers
 
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly WeatherRepository _weatherRepository;
 
-        public WeatherForecastController(IHttpClientFactory httpClientFactory, ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(IHttpClientFactory httpClientFactory, ILogger<WeatherForecastController> logger, WeatherRepository weatherRepository)
         {
             _httpClientFactory = httpClientFactory;
             _logger = logger;
+            _weatherRepository = weatherRepository;
         }
 
         [HttpGet]
         public async Task<WeatherForecast> Get(double lat = -33.52, double lon = 151.12)
-        {
-            //_weatherProcessor.Handle(new Model.Coordinate { Latitude = lat, Longitude = lon });
-            
+        {   
             var url = $"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,windspeed_10m&hourly=temperature_2m,relativehumidity_2m,windspeed_10m";
             _logger.LogInformation("Getting forecast");
 
-            var client = _httpClientFactory.CreateClient();        
+            using var client = _httpClientFactory.CreateClient();        
             var response = await client.GetFromJsonAsync<WeatherForecast>(url);
             return response;
         }
+
+        public WeatherForecast Get2(string location) => _weatherRepository.Get(location);
     }
 }

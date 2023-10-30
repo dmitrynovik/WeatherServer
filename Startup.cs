@@ -13,6 +13,7 @@ using Steeltoe.Management.Endpoint.Health;
 using Steeltoe.Management.Tracing;
 using Steeltoe.Messaging.RabbitMQ.Config;
 using Steeltoe.Messaging.RabbitMQ.Extensions;
+using WeatherWebServer.Services;
 
 namespace WeatherWebServer
 {
@@ -37,6 +38,7 @@ namespace WeatherWebServer
             services.ActivateActuatorEndpoints();
             services.AddDistributedTracingAspNetCore();
             services.AddControllers();
+            services.AddSingleton<WeatherRepository>();
             
             services.AddSwaggerGen(c =>
             {

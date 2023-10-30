@@ -1,10 +1,7 @@
 using Microsoft.Extensions.Logging;
 using OpenMeteo;
-using Steeltoe.Messaging.Handler.Attributes;
-using Steeltoe.Messaging.RabbitMQ.Attributes;
 using Steeltoe.Stream.Attributes;
 using Steeltoe.Stream.Messaging;
-using WeatherWebServer.Model;
 
 
 namespace WeatherWebServer.Services
@@ -13,10 +10,12 @@ namespace WeatherWebServer.Services
     public class WeatherConsumer
     {
         private ILogger<WeatherConsumer> _logger;
+        private readonly WeatherRepository _weatherRepository;
 
-        public WeatherConsumer(ILogger<WeatherConsumer> logger)
+        public WeatherConsumer(ILogger<WeatherConsumer> logger, WeatherRepository weatherRepository)
         {
             _logger = logger;
+            _weatherRepository = weatherRepository;
         }
 
         [StreamListener(ISink.INPUT)]
@@ -26,7 +25,7 @@ namespace WeatherWebServer.Services
         {
             var forecast = System.Text.Json.JsonSerializer.Deserialize<WeatherForecast>(strForecast);
             _logger.LogInformation("Received forecast for: " + forecast.Name);
-            //return forecast;
+            _weatherRepository.Save(forecast.Name, forecast);
         }
     }
 }
